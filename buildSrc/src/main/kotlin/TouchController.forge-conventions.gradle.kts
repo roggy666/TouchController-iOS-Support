@@ -43,9 +43,30 @@ val legacyLanguageFormatBool = legacyLanguageFormat.toBoolean()
 val excludeR8: String by extra.properties
 val excludeR8Jar: String by extra.properties
 val minecraftVersion = MinecraftVersion(gameVersion)
+val isLegacyVersion = minecraftVersion < MinecraftVersion("1.13")
 
 version = "$modVersion+forge-$gameVersion"
 group = "top.fifthlight.touchcontroller"
+
+// For legacy versions (pre-1.13), substitute minecraft dependency with local file
+if (isLegacyVersion) {
+    val mcpVersion = properties["mcpVersion"]?.toString() ?: ""
+    val mappedVersion = "${gameVersion}-${forgeVersion}_mapped_snapshot_${mcpVersion}-${gameVersion}"
+    val mappedForgeJar = file("${System.getProperty("user.home")}/.m2/repository/net/minecraftforge/forge/$mappedVersion/forge-$mappedVersion.jar")
+
+    if (mappedForgeJar.exists()) {
+        // Add local maven repository first so it takes precedence
+        repositories {
+            maven {
+                name = "LocalMappedForge"
+                url = uri("${System.getProperty("user.home")}/.m2/repository")
+                content {
+                    includeModule("net.minecraftforge", "forge")
+                }
+            }
+        }
+    }
+}
 
 minecraft {
     when (mappingType) {
