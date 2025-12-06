@@ -21,6 +21,7 @@ subprojects {
     group = "top.fifthlight.touchcontroller"
 
     repositories {
+        mavenLocal()
         mavenCentral()
         google()
         maven {

@@ -28,7 +28,8 @@ include("mod:common")
 include("mod:common-fabric")
 include("mod:common-lwjgl3")
 
-// Legacy versions - disabled for testing
+// Legacy versions
+include("mod:1.7.10:forge-1.7.10")
 //include("mod:1.12.2:forge-1.12.2")
 //include("mod:1.16.5:fabric-1.16.5")
 //include("mod:1.16.5:forge-1.16.5")
