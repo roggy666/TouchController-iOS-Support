@@ -115,7 +115,7 @@ private class CombineScreen(
         )
     }
 
-    fun mouseReleased(mouseX: Int, mouseY: Int, button: Int) {
+    override fun mouseReleased(mouseX: Int, mouseY: Int, button: Int) {
         val mouseButton = mapMouseButton(button) ?: return
         owner.onPointerEvent(
             PointerEvent(

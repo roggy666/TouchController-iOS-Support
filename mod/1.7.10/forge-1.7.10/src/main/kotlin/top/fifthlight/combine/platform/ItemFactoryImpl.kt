@@ -33,7 +33,7 @@ object ItemFactoryImpl : MetadataItemFactory {
         val minecraftItem = itemImpl.inner
         val stack = ItemStack(minecraftItem, amount)
         itemImpl.metadata?.let { metadata ->
-            stack.itemDamage = metadata
+            stack.setMetadata(metadata)
         }
         return ItemStackImpl(stack)
     }
@@ -58,11 +58,11 @@ object ItemFactoryImpl : MetadataItemFactory {
                 if (list.size <= 1) {
                     add(ItemImpl(item))
                 } else {
-                    list.distinctBy { it.itemDamage }.forEach { stack ->
+                    list.distinctBy { it.getMetadata() }.forEach { stack ->
                         add(
                             ItemImpl(
                                 inner = stack.item,
-                                metadata = stack.itemDamage, // Исправлено: itemDamage вместо metadata
+                                metadata = stack.getMetadata(),
                             )
                         )
                     }

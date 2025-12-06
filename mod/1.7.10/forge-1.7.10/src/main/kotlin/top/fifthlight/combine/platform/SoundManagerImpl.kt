@@ -13,6 +13,6 @@ class SoundManagerImpl(
         val soundName = when (kind) {
             SoundKind.BUTTON_PRESS -> "gui.button.press"
         }
-        soundManager.playSound(PositionedSoundRecord.func_147674_a(ResourceLocation(soundName), pitch))
+        soundManager.playSound(PositionedSoundRecord.createPositionedSoundRecord(ResourceLocation(soundName), pitch))
     }
 }

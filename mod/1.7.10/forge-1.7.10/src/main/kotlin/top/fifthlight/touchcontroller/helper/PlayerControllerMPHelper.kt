@@ -4,7 +4,6 @@ package top.fifthlight.touchcontroller.helper
 
 import net.minecraft.client.multiplayer.PlayerControllerMP
 import net.minecraft.entity.player.EntityPlayer
-import net.minecraft.network.play.client.C03PacketPlayer
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import top.fifthlight.combine.platform.toCombine
@@ -42,7 +41,7 @@ object PlayerControllerMPHelper : KoinComponent {
             val field = PlayerControllerMP::class.java.getDeclaredField("netClientHandler")
             field.isAccessible = true
             val handler = field.get(controller) as net.minecraft.client.network.NetHandlerPlayClient
-            handler.addToSendQueue(C03PacketPlayer.C05PacketPlayerLook(yaw, pitch, player.onGround))
+            handler.addToSendQueue(PacketHelper.createPlayerLookPacket(yaw, pitch, player.onGround))
         } catch (e: Exception) {
             // Игнорируем ошибки рефлексии
         }
@@ -64,7 +63,7 @@ object PlayerControllerMPHelper : KoinComponent {
             val field = PlayerControllerMP::class.java.getDeclaredField("netClientHandler")
             field.isAccessible = true
             val handler = field.get(controller) as net.minecraft.client.network.NetHandlerPlayClient
-            handler.addToSendQueue(C03PacketPlayer.C05PacketPlayerLook(player.rotationYaw, player.rotationPitch, player.onGround))
+            handler.addToSendQueue(PacketHelper.createPlayerLookPacket(player.rotationYaw, player.rotationPitch, player.onGround))
         } catch (e: Exception) {
             // Игнорируем ошибки рефлексии
         }

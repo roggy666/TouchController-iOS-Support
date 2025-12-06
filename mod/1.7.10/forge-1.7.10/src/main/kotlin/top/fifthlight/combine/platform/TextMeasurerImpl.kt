@@ -9,7 +9,7 @@ import kotlin.math.min
 
 object TextMeasurerImpl : TextMeasurer {
     private val client = Minecraft.getMinecraft()
-    private val textRenderer = client.fontRenderer
+    private val textRenderer = client.fontRendererObj
 
     override fun measure(text: String): IntSize {
         var width = 0

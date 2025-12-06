@@ -28,7 +28,7 @@ class CanvasImpl : Canvas, Gui() {
     }
 
     private val client = Minecraft.getMinecraft()
-    private val fontRenderer = client.fontRenderer
+    private val fontRenderer = client.fontRendererObj
     override val textLineHeight: Int = fontRenderer.FONT_HEIGHT
     private val scaledResolution by lazy { ScaledResolution(client, client.displayWidth, client.displayHeight) }
     private val itemRenderer = RenderItem.getInstance()
@@ -261,7 +261,7 @@ class CanvasImpl : Canvas, Gui() {
         GL11.glPushMatrix()
         GL11.glEnable(GL11.GL_DEPTH_TEST)
         RenderHelper.enableGUIStandardItemLighting()
-        itemRenderer.renderItemAndEffectIntoGUI(client.fontRenderer, client.textureManager, minecraftStack, offset.x, offset.y)
+        itemRenderer.renderItemAndEffectIntoGUI(client.fontRendererObj, client.textureManager, minecraftStack, offset.x, offset.y)
         RenderHelper.disableStandardItemLighting()
         GL11.glDisable(GL11.GL_DEPTH_TEST)
         GL11.glPopMatrix()

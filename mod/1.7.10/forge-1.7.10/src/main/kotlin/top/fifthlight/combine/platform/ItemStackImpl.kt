@@ -22,12 +22,12 @@ value class ItemStackImpl(
         }
 
     override val metadata: Int
-        get() = inner.itemDamage
+        get() = inner.getMetadata()
 
     override val item: ItemImpl
         get() = ItemImpl(
             inner = inner.item,
-            metadata = inner.itemDamage,
+            metadata = inner.getMetadata(),
         )
 
     override val isEmpty: Boolean
